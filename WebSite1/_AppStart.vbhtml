@@ -28,5 +28,5 @@
     Dim DB = Database.Open("DefaultConnection")
     Dim Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'System') PRINT 'Table Exists'ELSE CREATE TABLE dbo.System (SystemID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY, ApplicationName varchar(128) NOT NULL, Image varbinary NULL)"
     DB.Execute(Cmd)
-    Dim Test
-End Code
+
+    End Code

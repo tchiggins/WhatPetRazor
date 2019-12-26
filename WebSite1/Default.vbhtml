@@ -1,13 +1,16 @@
 ﻿@Code
     Layout = "~/_SiteLayout.vbhtml"
     PageData("Title") = "Home Page"
+
+    Dim SystemResult = Database.Open("DefaultConnection").QueryValue("SELECT TOP 1 ApplicationName from dbo.System")
+    Dim ApplicationName = SystemResult.ToString
 End Code
 
 @Section featured
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1>@PageData("Title").</h1>
+                <h1>@ApplicationName.</h1>
                 <h2>
                     Modify this template to jump-start your ASP.NET Web Pages application.</h2>
             </hgroup>
