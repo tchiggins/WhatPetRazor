@@ -1,5 +1,5 @@
 ﻿@Code
-    WebSecurity.InitializeDatabaseConnection("StarterSite", "UserProfile", "UserId", "Email", autoCreateTables:=true)
+    WebSecurity.InitializeDatabaseConnection("StarterSite", "UserProfile", "UserId", "Email", autoCreateTables:=True)
 
     ' To let users of this site log in using their accounts from other sites such as Microsoft, Facebook, and Twitter,
     ' you must update this site. For more information visit https://go.microsoft.com/fwlink/?LinkID=226949
