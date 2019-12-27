@@ -20,7 +20,6 @@
     ' To learn how to optimize scripts and stylesheets in your site go to  https://go.microsoft.com/fwlink/?LinkID=248974
 
     'System table
-
     Dim DB = Database.Open("DefaultConnection")
     Dim Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'System')
     PRINT 'Table Exists'ELSE CREATE TABLE dbo.System (SystemID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
@@ -35,17 +34,25 @@
     NOT NULL, Email varchar(128) NOT NULL, RegisteredDate datetime NOT NULL);"
     DB.Execute(Cmd)
 
-    'Ordo table
+    'Ordo table (mammal, bird, reptile etc.)
     Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Ordo')
     PRINT 'Table Exists'
     ELSE CREATE TABLE dbo.Ordo (OrdoID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
     OrdoName varchar(128) NOT NULL);"
     DB.Execute(Cmd)
 
-    'Species table
+    'Species table (cat, dog etc.)
     Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Species')
     PRINT 'Table Exists'
     ELSE CREATE TABLE dbo.Species (SpeciesID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
-    SpeciesName varchar(128) NOT NULL, OrdoID uniqueidentifier FOREIGN KEY REFERENCES Ordo(OrdoID));"
+    SpeciesName varchar(128) NOT NULL, OrdoID uniqueidentifier FOREIGN KEY REFERENCES Ordo(OrdoID) NOT NULL);"
     DB.Execute(Cmd)
+
+    'PetType table (
+    Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PetType')
+    PRINT 'Table Exists'
+    ELSE CREATE TABLE dbo.PetType (TypeID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
+    OrdoID uniqueidentifier FOREIGN KEY REFERENCES Ordo(OrdoID) NOT NULL,
+    SpeciesID uniqueidentifier FOREIGN KEY REFERENCES Species(SpeciesID) NOT NULL,
+    PetSize varchar(128) NOT NULL, PetSolitary bit NOT NULL"
     End Code
