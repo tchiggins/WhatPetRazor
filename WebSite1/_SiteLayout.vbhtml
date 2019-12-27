@@ -19,12 +19,17 @@
         <header>
               <div class="content-wrapper">
                   <div class="float-left">
-                      @If (Count > 0) Then
-                        @If (SystemResult.ElementAt(0).Image) Then
-                        @<p Class="site-title"><a href="~/">Logo Found in DB</a></p>
-                        End If
+                      @If Count > 0 Then
+                          @<h1>@SystemResult.ElementAt(0).ApplicationName</h1>
                       Else
-                        @<p Class="site-title"><a href="~/">No logo found in DB</a></p>
+                          @<h1>No Name Set</h1>
+                      End If
+                      @If (Count > 0) Then
+                          @If (SystemResult.ElementAt(0).Image) Then
+                              @<p Class="site-title"><a href="~/">Logo Found in DB</a></p>
+                          End If
+                      Else
+                          @<p Class="site-title"><a href="~/">No logo found in DB</a></p>
                       End If
                   </div>
                 <div Class="float-right">
@@ -46,9 +51,9 @@
                         </section>
                         <nav>
                             <ul id = "menu" >
-                                <li><a href="~/">Home</a></li>
-                            <li> <a href = "~/About" > About</a></li>
-                                <li> <a href = "~/Contact" > Contact</a></li>
+                                <li><a href="Default.vbhtml">Home</a></li>
+                            <li> <a href = "About.vbhtml" > About</a></li>
+                                <li> <a href = "Contact.vbhtml" > Contact</a></li>
                             </ul>
                         </nav>
                     </div>

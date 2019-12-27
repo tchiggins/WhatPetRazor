@@ -8,11 +8,6 @@ End Code
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                @If Count > 0 Then
-                    @<h1>@SystemResult.ElementAt(0).ApplicationName</h1>
-                Else
-                    @<h1>No Name Set</h1>
-                End If
                 <h2>Modify this template To jump-start your ASP.NET Web Pages application.</h2>
                 </hgroup>
                 <p>

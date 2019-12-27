@@ -23,7 +23,7 @@ End Code
         Use this area to provide additional information.
     </p>
     <ul>
-        <li><a href="~/">Home</a></li>
+        <li><a href="~/Default">Home</a></li>
         <li><a href="~/About">About</a></li>
         <li><a href="~/Contact">Contact</a></li>
     </ul>
