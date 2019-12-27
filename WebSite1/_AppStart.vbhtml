@@ -52,7 +52,8 @@
     Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PetType')
     PRINT 'Table Exists'
     ELSE CREATE TABLE dbo.PetType (TypeID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
-    OrdoID uniqueidentifier FOREIGN KEY REFERENCES Ordo(OrdoID) NOT NULL,
     SpeciesID uniqueidentifier FOREIGN KEY REFERENCES Species(SpeciesID) NOT NULL,
-    PetSize varchar(128) NOT NULL, PetSolitary bit NOT NULL"
+    PetSize varchar(128) NOT NULL, PetSolitary bit NOT NULL,
+    PetIndoors bit NOT NULL, PetOutdoors bit NOT NULL,
+    PetWalk bit NOT NULL"
     End Code
