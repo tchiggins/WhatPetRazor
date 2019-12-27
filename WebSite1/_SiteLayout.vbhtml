@@ -18,20 +18,18 @@
     End Code
         <header>
               <div class="content-wrapper">
-                  <div class="float-left">
-                      @If Count > 0 Then
-                          @<h1>@SystemResult.ElementAt(0).ApplicationName</h1>
-                      Else
-                          @<h1>No Name Set</h1>
-                      End If
-                      @If (Count > 0) Then
-                          @If (SystemResult.ElementAt(0).Image) Then
-                              @<p Class="site-title"><a href="~/">Logo Found in DB</a></p>
-                          End If
-                      Else
-                          @<p Class="site-title"><a href="~/">No logo found in DB</a></p>
-                      End If
-                  </div>
+                  <table>
+                      <tr>
+                          <td>
+                              <div class="float-left">
+                                  <img src="~/Images/logo.jpeg" alt="WhatPet Logo" style="width:30px" />
+                              </div>
+                          </td>
+                          <td>
+                              <h1>WhatPet</h1>
+                          </td>
+                      </tr>
+                  </table>
                 <div Class="float-right">
                     <section id = "login" >
     @If WebSecurity.IsAuthenticated Then
@@ -42,12 +40,12 @@
             <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
         </form>
     </text>
-                            Else
+    Else
                             @<ul>
                                 <li><a href="~/Account/Register">Register</a></li>
                                 <li><a href="~/Account/Login">Log in</a></li>
                             </ul>
-                            End If
+    End If
                         </section>
                         <nav>
                             <ul id = "menu" >

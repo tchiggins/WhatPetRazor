@@ -23,7 +23,7 @@
     Dim DB = Database.Open("DefaultConnection")
     Dim Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'System')
     PRINT 'Table Exists'ELSE CREATE TABLE dbo.System (SystemID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
-    ApplicationName varchar(128) NOT NULL, Image varbinary NULL);"
+    ApplicationName varchar(128) NOT NULL);"
     DB.Execute(Cmd)
 
     'Users table
@@ -45,15 +45,16 @@
     Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Species')
     PRINT 'Table Exists'
     ELSE CREATE TABLE dbo.Species (SpeciesID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
-    SpeciesName varchar(128) NOT NULL, OrdoID uniqueidentifier FOREIGN KEY REFERENCES Ordo(OrdoID) NOT NULL);"
+    SpeciesName varchar(128) NOT NULL,
+    OrdoID uniqueidentifier FOREIGN KEY REFERENCES Ordo(OrdoID) NOT NULL);"
     DB.Execute(Cmd)
 
-    'PetType table (
+    'PetType table (characteristics of specific breed)
     Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PetType')
     PRINT 'Table Exists'
     ELSE CREATE TABLE dbo.PetType (TypeID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
     SpeciesID uniqueidentifier FOREIGN KEY REFERENCES Species(SpeciesID) NOT NULL,
-    PetSize varchar(128) NOT NULL, PetSolitary bit NOT NULL,
-    PetIndoors bit NOT NULL, PetOutdoors bit NOT NULL,
-    PetWalk bit NOT NULL"
+    TypeName varchar(128 NOT NULL, PetSize varchar(128) NOT NULL,
+    PetSolitary bit NOT NULL, PetIndoors bit NOT NULL, PetOutdoors bit NOT NULL,
+    PetWalk bit NOT NULL, PetDiet varchar(128) NOT NULL, PetImage varchar(512) NOT NULL"
     End Code

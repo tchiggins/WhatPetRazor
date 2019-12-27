@@ -132,8 +132,7 @@ jQuery.fn = jQuery.prototype = {
 		// Return just the one element from the set
 		return num < 0 ? this[ num + this.length ] : this[ num ];
 	},
-	// Take an array of elements and push it onto the stack
-	// (returning the new matched element set)
+	// Take an array of elements and push it onto the stack (returning the new matched element set)
 	pushStack: function( elems ) {
 		// Build a new jQuery matched element set
 		var ret = jQuery.merge( this.constructor(), elems );
@@ -168,8 +167,7 @@ jQuery.fn = jQuery.prototype = {
 	end: function() {
 		return this.prevObject || this.constructor();
 	},
-	// For internal use only.
-	// Behaves like an Array's method, not like a jQuery method.
+	// For internal use only - behaves like an Array's method, not like a jQuery method.
 	push: push,
 	sort: arr.sort,
 	splice: arr.splice
@@ -202,8 +200,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 			// Extend the base object
 			for ( name in options ) {
 				copy = options[ name ];
-				// Prevent Object.prototype pollution
-				// Prevent never-ending loop
+				// Prevent Object.prototype pollution and never-ending loop
 				if ( name === "__proto__" || target === copy ) {
 					continue;
 				}
@@ -243,8 +240,7 @@ jQuery.extend( {
 	noop: function() {},
 	isPlainObject: function( obj ) {
 		var proto, Ctor;
-		// Detect obvious negatives
-		// Use toString instead of jQuery.type to catch host objects
+		// Detect obvious negatives, use toString instead of jQuery.type to catch host objects
 		if ( !obj || toString.call( obj ) !== "[object Object]" ) {
 			return false;
 		}
@@ -310,8 +306,7 @@ jQuery.extend( {
 	inArray: function( elem, arr, i ) {
 		return arr == null ? -1 : indexOf.call( arr, elem, i );
 	},
-	// Support: Android <=4.0 only, PhantomJS 1 only
-	// push.apply(_, arraylike) throws on ancient WebKit
+	// Support: Android <=4.0 only, PhantomJS 1 only, push.apply(_, arraylike) throws on ancient WebKit
 	merge: function( first, second ) {
 		var len = +second.length,
 			j = 0,
@@ -328,8 +323,7 @@ jQuery.extend( {
 			i = 0,
 			length = elems.length,
 			callbackExpect = !invert;
-		// Go through the array, only saving the items
-		// that pass the validator function
+		// Go through the array, only saving the items that pass the validator function
 		for ( ; i < length; i++ ) {
 			callbackInverse = !callback( elems[ i ], i );
 			if ( callbackInverse !== callbackExpect ) {
@@ -368,8 +362,7 @@ jQuery.extend( {
 	},
 	// A global GUID counter for objects
 	guid: 1,
-	// jQuery.support is not used in Core but other projects attach their
-	// properties to it so it needs to exist.
+	// jQuery.support is not used in Core but other projects attach their properties to it so it needs to exist.
 	support: support
 } );
 if ( typeof Symbol === "function" ) {
@@ -381,10 +374,7 @@ function( i, name ) {
 	class2type[ "[object " + name + "]" ] = name.toLowerCase();
 } );
 function isArrayLike( obj ) {
-	// Support: real iOS 8.2 only (not reproducible in simulator)
-	// `in` check used to prevent JIT error (gh-2145)
-	// hasOwn isn't used here due to false negatives
-	// regarding Nodelist length in IE
+	// Support: real iOS 8.2 only (not reproducible in simulator) `in` check used to prevent JIT error (gh-2145), hasOwn isn't used here due to false negatives regarding Nodelist length in IE
 	var length = !!obj && "length" in obj && obj.length,
 		type = toType( obj );
 	if ( isFunction( obj ) || isWindow( obj ) ) {
@@ -497,8 +487,7 @@ var i,
 			"*(even|odd|(([+-]|)(\\d*)n|)" + whitespace + "*(?:([+-]|)" + whitespace +
 			"*(\\d+)|))" + whitespace + "*\\)|)", "i" ),
 		"bool": new RegExp( "^(?:" + booleans + ")$", "i" ),
-		// For use in libraries implementing .is()
-		// We use this for POS matching in `select`
+		// For use in libraries implementing .is(), we use this for POS matching in `select`
 		"needsContext": new RegExp( "^" + whitespace + "*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" +
 			whitespace + "*((?:-\\d)?\\d*)" + whitespace + "*\\)|)(?=[^-]|$)", "i" )
 	},
@@ -514,9 +503,7 @@ var i,
 	runescape = new RegExp( "\\\\([\\da-f]{1,6}" + whitespace + "?|(" + whitespace + ")|.)", "ig" ),
 	funescape = function( _, escaped, escapedWhitespace ) {
 		var high = "0x" + escaped - 0x10000;
-		// NaN means non-codepoint
-		// Support: Firefox<24
-		// Workaround erroneous numeric interpretation of +"0x"
+		// NaN means non-codepoint, Support: Firefox<24, Workaround erroneous numeric interpretation of +"0x"
 		return high !== high || escapedWhitespace ?
 			escaped :
 			high < 0 ?
@@ -540,10 +527,7 @@ var i,
 		// Other potentially-special ASCII characters get backslash-escaped
 		return "\\" + ch;
 	},
-	// Used for iframes
-	// See setDocument()
-	// Removing the function wrapper causes a "Permission Denied"
-	// error in IE
+	// Used for iframes - see setDocument() - removing the function wrapper causes a "Permission Denied" error in IE
 	unloadHandler = function() {
 		setDocument();
 	},
