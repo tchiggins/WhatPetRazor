@@ -3,7 +3,6 @@
  * (c) The Knockout.js team - http://knockoutjs.com/
  * License: MIT (http://www.opensource.org/licenses/mit-license.php)
  */
-
 (function(){
 var DEBUG=true;
 (function(undefined){
@@ -14,7 +13,6 @@ var DEBUG=true;
         navigator = window['navigator'],
         jQueryInstance = window["jQuery"],
         JSON = window["JSON"];
-
     if (!jQueryInstance && typeof jQuery !== "undefined") {
         jQueryInstance = jQuery;
     }
@@ -37,11 +35,9 @@ var ko = typeof koExports !== 'undefined' ? koExports : {};
 // Google Closure Compiler helpers (used only to make the minified file smaller)
 ko.exportSymbol = function(koPath, object) {
     var tokens = koPath.split(".");
-
     // In the future, "ko" may become distinct from "koExports" (so that non-exported objects are not reachable)
     // At that point, "target" would be set to: (typeof koExports !== "undefined" ? koExports : ko)
     var target = ko;
-
     for (var i = 0; i < tokens.length - 1; i++)
         target = target[tokens[i]];
     target[tokens[tokens.length - 1]] = object;
@@ -50,7 +46,6 @@ ko.exportProperty = function(owner, publicName, object) {
     owner[publicName] = object;
 };
 ko.version = "3.5.0";
-
 ko.exportSymbol('version', ko.version);
 // For any options that may affect various areas of Knockout and aren't directly associated with data binding.
 ko.options = {

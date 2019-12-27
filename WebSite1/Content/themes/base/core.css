@@ -1,14 +1,11 @@
 /*!
  * jQuery UI CSS Framework 1.11.4
  * http://jqueryui.com
- *
  * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
- *
  * http://api.jqueryui.com/category/theming/
  */
-
 /* Layout helpers
 ----------------------------------*/
 .ui-helper-hidden {
@@ -55,22 +52,16 @@
 	opacity: 0;
 	filter:Alpha(Opacity=0); /* support: IE8 */
 }
-
 .ui-front {
 	z-index: 100;
 }
-
-
 /* Interaction Cues
 ----------------------------------*/
 .ui-state-disabled {
 	cursor: default !important;
 }
-
-
 /* Icons
 ----------------------------------*/
-
 /* states and images */
 .ui-icon {
 	display: block;
@@ -78,11 +69,8 @@
 	overflow: hidden;
 	background-repeat: no-repeat;
 }
-
-
 /* Misc visuals
 ----------------------------------*/
-
 /* Overlays */
 .ui-widget-overlay {
 	position: fixed;

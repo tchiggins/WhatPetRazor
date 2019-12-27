@@ -19,8 +19,10 @@
         <header>
               <div class="content-wrapper">
                   <div class="float-left">
-                      @If ((Count > 0) And (SystemResult.ElementAt(0).Image)) Then
+                      @If (Count > 0) Then
+                        @If (SystemResult.ElementAt(0).Image) Then
                         @<p Class="site-title"><a href="~/">Logo Found in DB</a></p>
+                        End If
                       Else
                         @<p Class="site-title"><a href="~/">No logo found in DB</a></p>
                       End If
@@ -65,7 +67,6 @@
                                         </div>
                                     </div>
                                 </footer>
-
                         @RenderSection("Scripts", required:=False)
                             </body>
 </html>

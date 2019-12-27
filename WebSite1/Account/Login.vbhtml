@@ -3,22 +3,18 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 End Section
-
 @Code
     Layout = "~/_SiteLayout.vbhtml"
     PageData("Title") = "Log in"
-
     ' Initialize general page variables
     Dim email As String = ""
     Dim password As String = ""
     Dim rememberMe As Boolean = False
-
     Dim returnUrl As String = Request.QueryString("ReturnUrl")
     If returnUrl.IsEmpty() Then
         ' Some external login providers always require a return URL value
         returnUrl = Href("~/")
     End If
-
     ' Setup validation
     Validation.RequireField("email", "You must specify an email address.")
     Validation.RequireField("password", "You must specify a password.")
@@ -27,7 +23,6 @@ End Section
             maxLength:=Int32.MaxValue,
             minLength:=6,
             errorMessage:="Password must be at least 6 characters"))
-
     ' If this is a POST request, validate and process data
     If IsPost Then
         AntiForgery.Validate()
@@ -40,12 +35,10 @@ End Section
             email = Request.Form("email")
             password = Request.Form("password")
             rememberMe = Request.Form("rememberMe").AsBool()
-
             If WebSecurity.UserExists(email) AndAlso WebSecurity.GetPasswordFailuresSinceLastSuccess(email) > 4 AndAlso WebSecurity.GetLastPasswordFailureDate(email).AddSeconds(60) > DateTime.UtcNow Then
                 Response.Redirect("~/Account/AccountLockedOut")
                 Return
             End If
-
             ' Attempt to log in using provided credentials
             If WebSecurity.Login(email, password, rememberMe) Then
                 Context.RedirectLocal(returnUrl)
@@ -56,18 +49,15 @@ End Section
         End If
     End If
 End Code
-
 <hgroup class="title">
     <h1>@PageData("Title").</h1>
 </hgroup>
-
 <section id="loginForm">
     <h2>Use a local account to log in.</h2>
     <form method="post">
         @AntiForgery.GetHtml()
         @* If one or more validation errors exist, show an error *@
         @Html.ValidationSummary("Log in was unsuccessful. Please correct the errors and try again.", excludeFieldErrors:=True, htmlAttributes:=Nothing)
-
         <fieldset>
             <legend>Log in to Your Account</legend>
             <ol>
@@ -96,7 +86,6 @@ End Code
         <a href="~/Account/ForgotPassword">Did you forget your password?</a>
     </p>
 </section>
-
 <section class="social" id="socialLoginForm">
     <h2>Use another service to log in.</h2>
      @RenderPage("~/Account/_ExternalLoginsList.vbhtml")

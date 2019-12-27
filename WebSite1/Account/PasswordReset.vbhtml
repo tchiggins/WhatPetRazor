@@ -3,20 +3,15 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 End Section
-
 @Code
     Layout = "~/_SiteLayout.vbhtml"
     PageData("Title") = "Password Reset"
-
     Dim passwordResetToken As String = Request.Form("resetToken")
-
     If passwordResetToken Is Nothing Then
         passwordResetToken = Request.QueryString("resetToken")
     End If
-
     Dim tokenExpired As Boolean = False
     Dim isSuccess As Boolean = False
-
     ' Setup validation
     Validation.RequireField("newPassword", "The new password field is required.")
     Validation.Add("confirmPassword",
@@ -27,7 +22,6 @@ End Section
             maxLength:=Int32.MaxValue,
             minLength:=6,
             errorMessage:="New password must be at least 6 characters"))
-
     If IsPost AndAlso Validation.IsValid() Then
         AntiForgery.Validate()
         Dim newPassword As String = Request("newPassword")
@@ -41,12 +35,10 @@ End Section
         End If
     End If
 End Code
-
 <hgroup class="title">
     <h1>@PageData("Title").</h1>
     <h2>Use the form below to reset your password.</h2>
 </hgroup>
-
 @If Not WebMail.SmtpServer.IsEmpty() Then
     If IsPost AndAlso Not Validation.IsValid() Then
         @<p class="validation-summary-errors">
@@ -58,13 +50,11 @@ End Code
             End If
         </p>
     End If
-
     If isSuccess Then
         @<p class="message-success">
             Password changed! Click <a href="~/Account/Login" title="Log in">here</a> to log in.
         </p>
     End If
-
     @<form method="post">
         @AntiForgery.GetHtml()
         <fieldset>

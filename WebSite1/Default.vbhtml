@@ -1,12 +1,9 @@
 ﻿@Code
     Layout = "~/_SiteLayout.vbhtml"
     PageData("Title") = "Home Page"
-
     Dim SystemResult = Database.Open("DefaultConnection").Query("SELECT * from dbo.System")
     Dim Count = SystemResult.Count
-
 End Code
-
 @Section featured
     <section class="featured">
         <div class="content-wrapper">
@@ -28,9 +25,7 @@ End Code
             </div>
         </section>
 End Section
-
 <h3>We suggest the following:</h3>
-
 <ol class="round">
                         <li class="one">
                             <h5> Getting Started</h5>
@@ -39,13 +34,11 @@ End Section
                             that let you create beautiful sites using the latest web standards.
                             <a href = "https://go.microsoft.com/fwlink/?LinkId=245139" > Learn more…</a>
                         </li>
-
                         <li class="two">
                             <h5> Add NuGet packages and jump start your coding</h5>
                             NuGet makes it easy to install and update free libraries and tools.
                             <a href = "https://go.microsoft.com/fwlink/?LinkId=245140" > Learn more…</a>
                         </li>
-
                         <li class="three">
                             <h5> Find Web Hosting</h5>
                             You can easily find a web hosting company that offers the right mix of features and price for your applications.

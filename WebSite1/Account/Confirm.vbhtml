@@ -1,10 +1,8 @@
 ﻿@Code
     Layout = "~/_SiteLayout.vbhtml"
     PageData("Title") = "Registration Confirmation Page"
-
     Dim message As String = ""
     Dim confirmationToken As String = Request("confirmationCode")
-
     WebSecurity.Logout()
     If Not confirmationToken.IsEmpty() Then
         If WebSecurity.ConfirmAccount(confirmationToken) Then
@@ -14,12 +12,10 @@
         End If
     End If
 End Code
-
 <hgroup class="title">
     <h1>@PageData("Title").</h1>
     <h2>Use the form below to confirm your account.</h2>
 </hgroup>
-
 @If Not message.IsEmpty() Then
     @<p>@message</p>
 Else

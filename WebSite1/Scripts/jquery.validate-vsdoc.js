@@ -3,10 +3,8 @@
 * You should not use this file at runtime inside the browser--it is only
 * intended to be used only for design-time IntelliSense.  Please use the
 * standard jQuery library for all production use.
-*
 * Comment version: 1.17.0
 */
-
 /*
 * Note: While Microsoft is not the author of this file, Microsoft is
 * offering you a license subject to the terms of the Microsoft Software
@@ -14,15 +12,11 @@
 * Microsoft reserves all other rights. The notices below are provided
 * for informational purposes only and are not the license terms under
 * which Microsoft distributed this file.
-*
 * jQuery Validation Plugin - v1.17.0 - 12/5/2016
 * https://github.com/jzaefferer/jquery-validation
 * Copyright (c) 2013 Jörn Zaefferer; Licensed MIT
-*
 */
-
 (function($) {
-
 $.extend($.fn, {
 	// http://docs.jquery.com/Plugins/Validation/validate
 	validate: function( options ) {
@@ -35,19 +29,16 @@ $.extend($.fn, {
 		/// <param name="options" type="Object">
 		/// A set of key/value pairs that configure the validate. All options are optional.
 		/// </param>
-
 		// if nothing is selected, return nothing; can't chain anyway
 		if (!this.length) {
 			options && options.debug && window.console && console.warn( "nothing selected, can't validate, returning nothing" );
 			return;
 		}
-
 		// check if a validator for this form was already created
 		var validator = $.data(this[0], 'validator');
 		if ( validator ) {
 			return validator;
 		}
-		
 		validator = new $.validator( options, this[0] );
 		$.data(this[0], 'validator', validator); 
 		

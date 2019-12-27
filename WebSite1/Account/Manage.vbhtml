@@ -3,17 +3,12 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 End Section
-
 @Code
     WebSecurity.RequireAuthenticatedUser()
-
     Layout = "~/_SiteLayout.vbhtml"
     PageData("Title") = "Manage Account"
-
     Dim action As String = Request.Form("action")
-
     Dim hasLocalAccount As Boolean = OAuthWebSecurity.HasLocalAccount(WebSecurity.CurrentUserId)
-
     Dim successMessage As String = ""
     Dim message As String = Request.QueryString("message")
     If message = "ChangedPassword" Then
@@ -23,13 +18,11 @@ End Section
     ElseIf message = "RemovedLogin" Then
         successMessage = "The external login was removed."
     End If
-
     Dim externalLogins =
-        (From account In OAuthWebSecurity.GetAccountsFromUserName(WebSecurity.CurrentUserName)
-         Let clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider)
-         Select New With { .Provider = account.Provider, .ProviderDisplayName = clientData.DisplayName, .UserId = account.ProviderUserId }).ToList()
+(From account In OAuthWebSecurity.GetAccountsFromUserName(WebSecurity.CurrentUserName)
+ Let clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider)
+ Select New With { .Provider = account.Provider, .ProviderDisplayName = clientData.DisplayName, .UserId = account.ProviderUserId }).ToList()
     Dim canRemoveLogin As Boolean = externalLogins.Count > 1 OrElse hasLocalAccount
-
     ' Setup validation
     If hasLocalAccount Then
         Validation.RequireField("currentPassword", "The current password field is required.")
@@ -48,7 +41,6 @@ End Section
             maxLength:=Int32.MaxValue,
             minLength:=6,
             errorMessage:="New password must be at least 6 characters"))
-
     If IsPost Then
         AntiForgery.Validate()
         If action = "password" Then
@@ -56,7 +48,6 @@ End Section
             Dim currentPassword As String = Request.Form("currentPassword")
             Dim newPassword As String = Request.Form("newPassword")
             Dim confirmPassword As String = Request.Form("confirmPassword")
-
             If Validation.IsValid() Then
                 If hasLocalAccount Then
                     If WebSecurity.ChangePassword(WebSecurity.CurrentUserName, currentPassword, newPassword) Then
@@ -82,7 +73,6 @@ End Section
             ' Remove external login
             Dim provider As String = Request.Form("provider")
             Dim userId As String = Request.Form("userId")
-
             message = Nothing
             Dim ownerAccount As String = OAuthWebSecurity.GetUserName(provider, userId)
             ' Only remove the external login if it is owned by the currently logged in user and it is not the users last login credential
@@ -102,19 +92,15 @@ End Section
         End If
     End If
 End Code
-
 <hgroup class="title">
     <h1>@PageData("Title").</h1>
 </hgroup>
-
 @If Not successMessage.IsEmpty() Then
     @<p class="message-success">
         @successMessage
     </p>
 End If
-
 <p>You're logged in as <strong>@WebSecurity.CurrentUserName</strong>.</p>
-
 @If hasLocalAccount Then
     @<h2>Change password</h2>
 Else
@@ -123,11 +109,9 @@ Else
         You do not have a local password for this site. Add a local password so you can log in without an external login.
     </p>
 End If
-
 <form method="post">
     @AntiForgery.GetHtml()
     @Html.ValidationSummary(excludeFieldErrors:=True)
-
     <fieldset>
         <legend>
         @If hasLocalAccount Then
@@ -165,7 +149,6 @@ End If
         End If
     </fieldset>
 </form>
-
 <section id="externalLogins">
     @If externalLogins.Count > 0 Then
         @<h3>Registered external logins</h3>
@@ -194,7 +177,6 @@ End If
             </tbody>
         </table>
     End If
-
     <h3>Add an external login</h3>
     @RenderPage("~/Account/_ExternalLoginsList.vbhtml")
 </section>

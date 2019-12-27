@@ -1,8 +1,6 @@
 /*!
  * jQuery Validation Plugin v1.17.0
- *
  * https://jqueryvalidation.org/
- *
  * Copyright (c) 2017 Jörn Zaefferer
  * Released under the MIT license
  */
@@ -17,7 +15,6 @@
 }(function( $ ) {
 
 $.extend( $.fn, {
-
 	// https://jqueryvalidation.org/validate/
 	validate: function( options ) {
 
@@ -28,32 +25,24 @@ $.extend( $.fn, {
 			}
 			return;
 		}
-
 		// Check if a validator for this form was already created
 		var validator = $.data( this[ 0 ], "validator" );
 		if ( validator ) {
 			return validator;
 		}
-
 		// Add novalidate tag if HTML5.
 		this.attr( "novalidate", "novalidate" );
-
 		validator = new $.validator( options, this[ 0 ] );
 		$.data( this[ 0 ], "validator", validator );
-
 		if ( validator.settings.onsubmit ) {
-
 			this.on( "click.validate", ":submit", function( event ) {
-
 				// Track the used submit button to properly handle scripted
 				// submits later.
 				validator.submitButton = event.currentTarget;
-
 				// Allow suppressing validation by adding a cancel class to the submit button
 				if ( $( this ).hasClass( "cancel" ) ) {
 					validator.cancelSubmit = true;
 				}
-
 				// Allow suppressing validation by adding the html5 formnovalidate attribute to the submit button
 				if ( $( this ).attr( "formnovalidate" ) !== undefined ) {
 					validator.cancelSubmit = true;

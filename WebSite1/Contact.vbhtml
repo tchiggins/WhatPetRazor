@@ -2,12 +2,10 @@
     Layout = "~/_SiteLayout.vbhtml"
     PageData("Title") = "Contact"
 End Code
-
 <hgroup class="title">
     <h1>@PageData("Title").</h1>
     <h2>Your contact page.</h2>
 </hgroup>
-
 <section class="contact">
     <header>
         <h3>Phone:</h3>
@@ -21,7 +19,6 @@ End Code
         <span>425.555.0199</span>
     </p>
 </section>
-
 <section class="contact">
     <header>
         <h3>Email:</h3>
@@ -39,7 +36,6 @@ End Code
         <span><a href="mailto:General@example.com">General@example.com</a></span>
     </p>
 </section>
-
 <section class="contact">
     <header>
         <h3>Address:</h3>

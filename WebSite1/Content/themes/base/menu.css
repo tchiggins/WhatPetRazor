@@ -1,11 +1,9 @@
 /*!
  * jQuery UI Menu 1.11.4
  * http://jqueryui.com
- *
  * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
- *
  * http://api.jqueryui.com/menu/#theming
  */
 .ui-menu {
@@ -38,7 +36,6 @@
 .ui-menu .ui-state-active {
 	margin: -1px;
 }
-
 /* icon support */
 .ui-menu-icons {
 	position: relative;
@@ -46,7 +43,6 @@
 .ui-menu-icons .ui-menu-item {
 	padding-left: 2em;
 }
-
 /* left-aligned */
 .ui-menu .ui-icon {
 	position: absolute;
@@ -55,7 +51,6 @@
 	left: .2em;
 	margin: auto 0;
 }
-
 /* right-aligned */
 .ui-menu .ui-menu-icon {
 	left: auto;

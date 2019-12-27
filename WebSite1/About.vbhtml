@@ -2,26 +2,21 @@
     Layout = "~/_SiteLayout.vbhtml"
     PageData("Title") = "About"
 End Code
-
 <hgroup class="title">
     <h1>@PageData("Title").</h1>
     <h2>Your app description page.</h2>
 </hgroup>
-
 <article>
     <p>
         Use this area to provide additional information.
     </p>
-
     <p>
         Use this area to provide additional information.
     </p>
-
     <p>
         Use this area to provide additional information.
     </p>
 </article>
-
 <aside>
     <h3>Aside Title</h3>
     <p>

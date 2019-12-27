@@ -1,11 +1,9 @@
 /*!
  * jQuery UI Button 1.11.4
  * http://jqueryui.com
- *
  * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
- *
  * http://api.jqueryui.com/button/#theming
  */
 .ui-button {
@@ -40,7 +38,6 @@ button.ui-button-icon-only {
 button.ui-button-icons-only {
 	width: 3.7em;
 }
-
 /* button text element */
 .ui-button .ui-button-text {
 	display: block;
@@ -70,7 +67,6 @@ button.ui-button-icons-only {
 input.ui-button {
 	padding: .4em 1em;
 }
-
 /* button icon element(s) */
 .ui-button-icon-only .ui-icon,
 .ui-button-text-icon-primary .ui-icon,
@@ -95,7 +91,6 @@ input.ui-button {
 .ui-button-icons-only .ui-button-icon-secondary {
 	right: .5em;
 }
-
 /* button sets */
 .ui-buttonset {
 	margin-right: 7px;
@@ -104,7 +99,6 @@ input.ui-button {
 	margin-left: 0;
 	margin-right: -.3em;
 }
-
 /* workarounds */
 /* reset extra padding in Firefox, see h5bp.com/l */
 input.ui-button::-moz-focus-inner,

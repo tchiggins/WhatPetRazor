@@ -3,22 +3,17 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 End Section
-
 @Code
     Layout = "~/_SiteLayout.vbhtml"
     PageData("Title") = "Forget Your Password"
-
     Dim passwordSent As Boolean = False
     Dim resetToken As String = ""
     Dim email As String = Request.Form("email")
-
     If email Is Nothing Then
         email = Request.QueryString("email")
     End If
-
     ' Setup validation
     Validation.RequireField("email", "The email address field is required.")
-
     If IsPost Then
         AntiForgery.Validate()
         ' validate email
@@ -43,27 +38,22 @@ End Section
         End If
     End If
 End Code
-
 <hgroup class="title">
     <h1>@PageData("Title").</h1>
     <h2>Use the form below to reset your password.</h2>
 </hgroup>
-
 @If Not WebMail.SmtpServer.IsEmpty() Then
     @<p>
         We will send password reset instructions to the email address associated with your account.
     </p>
-
     If passwordSent Then
         @<p class="message-success">
             Instructions to reset your password have been sent to the specified email address.
         </p>
     End If
-
     @<form method="post">
         @AntiForgery.GetHtml()
         @Html.ValidationSummary(excludeFieldErrors:=True)
-
         <fieldset>
             <legend>Password Reset Instructions Form</legend>
             <ol>
