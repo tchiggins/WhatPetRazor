@@ -31,7 +31,8 @@
     PRINT 'Table Exists'
     ELSE CREATE TABLE dbo.Users (UserID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
     FirstName varchar(128) NOT NULL, LastName varchar(128) NOT NULL, Gender varchar (128)
-    NOT NULL, Email varchar(128) NOT NULL, RegisteredDate datetime NOT NULL);"
+    NOT NULL, Email varchar(128) NOT NULL, RegisteredDate datetime NOT NULL,
+    PassHash varchar(512) NOT NULL);"
     DB.Execute(Cmd)
 
     'Ordo table (mammal, bird, reptile etc.)
