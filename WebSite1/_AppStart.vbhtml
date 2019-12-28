@@ -7,6 +7,7 @@
 
         Dim CSVImportVB As New DataSetup
         CSVImportVB.PC_CSVImport("PetClass.csv")
+        CSVImportVB.S_CSVImport("Species.csv")
 
         Return True
     End Function

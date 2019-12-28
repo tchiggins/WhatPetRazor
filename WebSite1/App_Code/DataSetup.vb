@@ -70,4 +70,42 @@ Public Class DataSetup
         myConn.Close()
         Return True
     End Function
+    Public Function S_CSVImport(FileName As String) As Boolean
+        'Connect to DB
+        'Create a Connection object.
+        Dim temp As String
+#If DEBUG Then
+        myConn = New SqlConnection("Initial Catalog=Pets;Data Source=tcp:mssqluk18.prosql.net;User ID=oliver;Password=Vintage12!$;")
+#Else
+        myConn = New SqlConnection("Initial Catalog=Pets;Data Source=tcp:mssqluk18.prosql.net;User ID=oliver;Password=Vintage12!$;")
+#End If
+        myConn.Open()
+        Dim Cmd As String
+        'Upload and save the file  
+        Dim CSVPath As String = Server.MapPath("~/Files/") + Path.GetFileName(FileName)
+        'Read the contents of CSV file.  
+        Dim csvData As String = File.ReadAllText(CSVPath)
+        'Execute a loop over the rows.  
+        For Each row As String In csvData.Split(ControlChars.Cr)
+            If Not String.IsNullOrEmpty(row) Then
+                Dim i As Integer = 0
+                'Execute a loop over the columns.  
+                For Each cell As String In row.Split(","c)
+                    If cell.Length > 1 Then
+                        Cmd = "SELECT FROM dbo.PetClass WHERE ClassName = '"
+                        Cmd += cell
+                        Cmd += "' ;"
+                        SendToDB(myConn, Cmd)
+                        Cmd = "INSERT INTO dbo.Species (SpeciesID, SpeciesName) VALUES (NEWID(), '"
+                        Cmd += cell
+                        Cmd += "', "
+                        SendToDB(myConn, Cmd)
+                    End If
+                    i += 1
+                Next
+            End If
+        Next
+        myConn.Close()
+        Return True
+    End Function
 End Class
