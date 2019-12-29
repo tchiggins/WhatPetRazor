@@ -87,7 +87,7 @@ Public Class DataSetup
 #End If
         myConn.Open()
         Dim Cmd As String
-        Dim ID As System.Guid
+        Dim ID As Guid
         'Upload and save the file  
         Dim CSVPath As String = Server.MapPath("~/Files/") + Path.GetFileName(FileName)
         'Read the contents of CSV file.  
