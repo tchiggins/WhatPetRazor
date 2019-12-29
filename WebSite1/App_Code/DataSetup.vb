@@ -34,8 +34,15 @@ Public Class DataSetup
         myCmd = myConn.CreateCommand
         myCmd.CommandText = Command
         'Execute the command.
-        Dim count = myCmd.ExecuteNonQuery()
+        Dim count As Integer = myCmd.ExecuteNonQuery()
         Return count
+    End Function
+    Private Function SendToDBReturn(myConn As SqlConnection, Command As String) As System.Guid
+        myCmd = myConn.CreateCommand
+        myCmd.CommandText = Command
+        'Execute the command.
+        Dim myScalar As System.Guid = myCmd.ExecuteScalar
+        Return myScalar
     End Function
     Public Function PC_CSVImport(FileName As String) As Boolean
         'Connect to DB
@@ -73,7 +80,6 @@ Public Class DataSetup
     Public Function S_CSVImport(FileName As String) As Boolean
         'Connect to DB
         'Create a Connection object.
-        Dim temp As String
 #If DEBUG Then
         myConn = New SqlConnection("Initial Catalog=Pets;Data Source=tcp:mssqluk18.prosql.net;User ID=oliver;Password=Vintage12!$;")
 #Else
@@ -81,6 +87,7 @@ Public Class DataSetup
 #End If
         myConn.Open()
         Dim Cmd As String
+        Dim ID As System.Guid
         'Upload and save the file  
         Dim CSVPath As String = Server.MapPath("~/Files/") + Path.GetFileName(FileName)
         'Read the contents of CSV file.  
@@ -92,13 +99,14 @@ Public Class DataSetup
                 'Execute a loop over the columns.  
                 For Each cell As String In row.Split(","c)
                     If cell.Length > 1 Then
-                        Cmd = "SELECT FROM dbo.PetClass WHERE ClassName = '"
+                        Cmd = "SELECT PetClassID FROM dbo.PetClass WHERE ClassName = '"
                         Cmd += cell
                         Cmd += "' ;"
-                        SendToDB(myConn, Cmd)
-                        Cmd = "INSERT INTO dbo.Species (SpeciesID, SpeciesName) VALUES (NEWID(), '"
+                        Cmd = "INSERT INTO dbo.Species (SpeciesID, SpeciesName, PetClassID) VALUES (NEWID(), '"
                         Cmd += cell
-                        Cmd += "', "
+                        Cmd += "', '"
+                        Cmd += ID.ToString()
+                        Cmd += "' );"
                         SendToDB(myConn, Cmd)
                     End If
                     i += 1

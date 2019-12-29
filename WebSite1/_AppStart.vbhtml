@@ -16,7 +16,8 @@
         'System table
         Dim DB = Database.Open("DefaultConnection")
         Dim Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'System')
-        PRINT 'Table Exists'ELSE CREATE TABLE dbo.System (SystemID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
+        PRINT 'Table Exists'
+        ELSE CREATE TABLE dbo.System (SystemID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
         ApplicationName varchar(128) NOT NULL);"
         DB.Execute(Cmd)
 
@@ -39,6 +40,14 @@
         ClassName varchar(128) NOT NULL);"
         DB.Execute(Cmd)
 
+        'Species table (cat, dog etc.)
+        Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Species')
+        PRINT 'Table Exists'
+        ELSE CREATE TABLE dbo.Species (SpeciesID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
+        SpeciesName varchar(128) NOT NULL,
+        PetClassID uniqueidentifier NOT NULL);"
+        DB.Execute(Cmd)
+
         'PetType table (characteristics of specific breed)
         'PetSize represents size relative to others of its species, with a null value representing average/medium size, a 0 representing smaller than standard, and a 1 representing larger than standard
         Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PetType')
@@ -48,14 +57,6 @@
         TypeName varchar(128) NOT NULL, PetSize bit NULL,
         PetSolitary bit NOT NULL, PetIndoors bit NOT NULL, PetOutdoors bit NOT NULL,
         PetWalk bit NOT NULL, PetDiet varchar(128) NOT NULL, PetImage varchar(512) NOT NULL);"
-        DB.Execute(Cmd)
-
-        'Species table (cat, dog etc.)
-        Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Species')
-        PRINT 'Table Exists'
-        ELSE CREATE TABLE dbo.Species (SpeciesID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
-        SpeciesName varchar(128) NOT NULL,
-        PetClassID uniqueidentifier FOREIGN KEY REFERENCES PetClass(PetClassID) NOT NULL);"
         DB.Execute(Cmd)
 
         Return True
