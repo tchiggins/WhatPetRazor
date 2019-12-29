@@ -13,7 +13,7 @@ Public Class DataSetup
         Dim count As Integer = myCmd.ExecuteNonQuery()
         Return count
     End Function
-    Private Function SendToDBReturn(myConn As SqlConnection, Command As String) As Guid
+    Private Function SendToDBReturn(myConn As SqlConnection, Command As String, Item As String) As Guid
         Dim myCmd As SqlCommand
         Dim myReader As SqlDataReader
         Dim results As Guid
@@ -23,7 +23,7 @@ Public Class DataSetup
         myReader = myCmd.ExecuteReader()
         'Concatenate the query result into a string.
         Do While myReader.Read()
-            results = myReader.Item("PetClassID")
+            results = myReader.Item(Item)
         Loop
         myReader.Close()
         Return results
@@ -110,7 +110,7 @@ Public Class DataSetup
                 Cmd = "SELECT TOP (1) PetClassID FROM pets.dbo.PetClass WHERE ClassName = '"
                 Cmd += dt.Rows(readRow)(0)
                 Cmd += "' ;"
-                ID = SendToDBReturn(myConn, Cmd)
+                ID = SendToDBReturn(myConn, Cmd, "PetClassID")
                 Cmd = "INSERT INTO pets.dbo.Species (SpeciesID, SpeciesName, PetClassID) VALUES (NEWID(), '"
                 Cmd += dt.Rows(readRow)(1)
                 Cmd += "', '"
