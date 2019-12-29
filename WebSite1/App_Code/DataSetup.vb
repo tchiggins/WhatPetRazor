@@ -102,6 +102,7 @@ Public Class DataSetup
                         Cmd = "SELECT PetClassID FROM dbo.PetClass WHERE ClassName = '"
                         Cmd += cell
                         Cmd += "' ;"
+                        ID = SendToDBReturn(myConn, Cmd)
                         Cmd = "INSERT INTO dbo.Species (SpeciesID, SpeciesName, PetClassID) VALUES (NEWID(), '"
                         Cmd += cell
                         Cmd += "', '"
