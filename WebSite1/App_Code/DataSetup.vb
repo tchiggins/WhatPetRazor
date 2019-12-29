@@ -30,11 +30,8 @@ Public Class DataSetup
     End Function
     Public Function PC_CSVImport(FileName As String) As Boolean
         'Create a Connection object
-#If DEBUG Then
         myConn = New SqlConnection("Initial Catalog=Pets;Data Source=tcp:mssqluk18.prosql.net;User ID=oliver;Password=Vintage12!$;")
-#Else
-        myConn = New SqlConnection("Initial Catalog=Pets;Data Source=tcp:mssqluk18.prosql.net;User ID=oliver;Password=Vintage12!$;")
-#End If
+
         'Connect to DB
         myConn.Open()
         Dim Cmd As String
@@ -66,11 +63,8 @@ Public Class DataSetup
     End Function
     Public Function S_CSVImport(FileName As String) As Boolean
         'Create a Connection object
-#If DEBUG Then
         myConn = New SqlConnection("Initial Catalog=Pets;Data Source=tcp:mssqluk18.prosql.net;User ID=oliver;Password=Vintage12!$;")
-#Else
-        myConn = New SqlConnection("Initial Catalog=Pets;Data Source=tcp:mssqluk18.prosql.net;User ID=oliver;Password=Vintage12!$;")
-#End If
+
         'Connect to DB
         myConn.Open()
 
