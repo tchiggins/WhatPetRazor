@@ -2,8 +2,11 @@
     Function InsertIntoDB()
         Dim DB = Database.Open("DefaultConnection")
         Dim Cmd = "DELETE FROM dbo.PetClass"
-
         DB.Execute(Cmd)
+
+        Cmd = "DELETE FROM dbo.Species"
+        DB.Execute(Cmd)
+
 
         Dim CSVImportVB As New DataSetup
         CSVImportVB.PC_CSVImport("PetClass.csv")
