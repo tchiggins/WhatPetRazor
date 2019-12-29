@@ -116,4 +116,21 @@ Public Class DataSetup
         myConn.Close()
         Return True
     End Function
+    Public Function PT_CSVImport(FileName As String) As Boolean
+        'Create a Connection object
+        myConn = New SqlConnection("Initial Catalog=Pets;Data Source=tcp:mssqluk18.prosql.net;User ID=oliver;Password=Vintage12!$;")
+
+        'Connect to DB
+        myConn.Open()
+
+        Dim Cmd As String
+        Dim ID As Guid
+        'Upload and save the file  
+        Dim CSVPath As String = Server.MapPath("~/Files/") + Path.GetFileName(FileName)
+
+        'Create a DataTable
+        Dim dt As New DataTable()
+        dt.Columns.AddRange(New DataColumn(8) {New DataColumn("SpeciesName", GetType(String)), New DataColumn("TypeName", GetType(String)), New DataColumn("PetSize", GetType(String)), New DataColumn("PetSolitary", GetType(Boolean)), New DataColumn("PetIndoors", GetType(Boolean)), New DataColumn("PetOutdoors", GetType(Boolean)), New DataColumn("PetWalk", GetType(Boolean)), New DataColumn("PetDiet", GetType(String)), New DataColumn("PetImage", GetType(String))})
+        Return True
+    End Function
 End Class

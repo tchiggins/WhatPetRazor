@@ -1,16 +1,19 @@
 ﻿@Functions
     Function InsertIntoDB()
         Dim DB = Database.Open("DefaultConnection")
-        Dim Cmd = "DELETE FROM dbo.PetClass"
+
+        Dim Cmd = "DELETE FROM pets.dbo.PetClass"
         DB.Execute(Cmd)
 
-        Cmd = "DELETE FROM dbo.Species"
+        Cmd = "DELETE FROM pets.dbo.Species"
         DB.Execute(Cmd)
 
+        Cmd = "DELETE FROM pets.dbo."
 
         Dim CSVImportVB As New DataSetup
         CSVImportVB.PC_CSVImport("PetClass.csv")
         CSVImportVB.S_CSVImport("Species.csv")
+        CSVImportVB.PT_CSVImport("PetType.csv")
 
         Return True
     End Function
@@ -52,12 +55,12 @@
         DB.Execute(Cmd)
 
         'PetType table (characteristics of specific breed)
-        'PetSize represents size relative to others of its species, with a null value representing average/medium size, a 0 representing smaller than standard, and a 1 representing larger than standard
+        'PetSize will work on values of either Small, Average, or Large (as determined by the average for that particular species)
+        'Bit-type values work as boolean, with 0 representing false/not required/this type of pet can't or should not be kept this way, and 1 representing true/this type of pet requires this/this type of pet can or must be kept this way
         Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PetType')
         PRINT 'Table Exists'
         ELSE CREATE TABLE dbo.PetType (TypeID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
-        SpeciesID uniqueidentifier FOREIGN KEY REFERENCES Species(SpeciesID) NOT NULL,
-        TypeName varchar(128) NOT NULL, PetSize bit NULL,
+        SpeciesID uniqueidentifier NOT NULL, TypeName varchar(128) NOT NULL, PetSize varchar(128) NOT NULL,
         PetSolitary bit NOT NULL, PetIndoors bit NOT NULL, PetOutdoors bit NOT NULL,
         PetWalk bit NOT NULL, PetDiet varchar(128) NOT NULL, PetImage varchar(512) NOT NULL);"
         DB.Execute(Cmd)
