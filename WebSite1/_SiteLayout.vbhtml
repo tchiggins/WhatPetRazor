@@ -12,10 +12,6 @@
         <meta name="viewport" content="width=device-width" />
     </head>
     <body></body>
-    @Code
-        Dim SystemResult = Database.Open("DefaultConnection").Query("SELECT * from dbo.System")
-        Dim Count = SystemResult.Count
-    End Code
         <header>
               <div class="content-wrapper">
                   <table>
