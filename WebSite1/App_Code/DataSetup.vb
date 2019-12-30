@@ -131,6 +131,42 @@ Public Class DataSetup
         'Create a DataTable
         Dim dt As New DataTable()
         dt.Columns.AddRange(New DataColumn(8) {New DataColumn("SpeciesName", GetType(String)), New DataColumn("TypeName", GetType(String)), New DataColumn("PetSize", GetType(String)), New DataColumn("PetSolitary", GetType(Boolean)), New DataColumn("PetIndoors", GetType(Boolean)), New DataColumn("PetOutdoors", GetType(Boolean)), New DataColumn("PetWalk", GetType(Boolean)), New DataColumn("PetDiet", GetType(String)), New DataColumn("PetImage", GetType(String))})
+
+        'Read the contents of CSV file
+        Dim csvData As String = File.ReadAllText(CSVPath)
+        Dim cell As String
+        Dim colNum As Integer = 0
+        Dim numCols As Integer = 9
+        Dim rowNum As Integer = 0
+
+        'Execute a loop over the rows
+        For Each row As String In csvData.Split(ControlChars.Cr)
+            If Not String.IsNullOrEmpty(row) Then
+                dt.Rows.Add()
+                colNum = 0
+                'Execute a loop over the columns
+                For Each cell In row.Split(","c)
+                    If colNum < numCols Then
+                        'Fixes problem with linefeed exception
+                        dt.Rows(rowNum)(colNum) = Replace(cell, vbLf, "")
+                    End If
+                    colNum += 1
+                Next
+            End If
+            rowNum += 1
+        Next
+        For readRow As Integer = 0 To (rowNum - 1) Step 1
+            If dt.Rows(readRow)(0).Length > 1 Then
+                Cmd = "SELECT TOP (1) SpeciesID FROM pets.dbo.PetClass WHERE SpeciesName = '"
+                Cmd += dt.Rows(readRow)(0)
+                Cmd += "' ;"
+                ID = SendToDBReturn(myConn, Cmd, "SpeciesID")
+                Cmd = "INSERT INTO pets.dbo.PetType (TypeID, SpeciesID, TypeName, PetSize, PetSolitary, PetIndoors, PetOutdoors, PetWalk, PetDiet, PetImage) VALUES (NEWID(), '"
+                Cmd += ID.ToString()
+                Cmd += "', "
+                SendToDB(myConn, Cmd)
+            End If
+        Next
         Return True
     End Function
 End Class
