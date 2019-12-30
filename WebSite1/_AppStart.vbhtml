@@ -30,7 +30,7 @@
         'Users table
         'UserID represents the DB's ID code for the user (user will never see)
         'RegisteredDate will track the date upon which that user registered
-        'PassHash will store a hashed version of the user's password
+        'PassHash will store a hashed version of the user's password to add security in case of DB compromise
         Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Users')
         PRINT 'Table Exists'
         ELSE CREATE TABLE dbo.Users (UserID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
