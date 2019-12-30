@@ -20,6 +20,9 @@
     End Function
 
     Function CreateTables() As Boolean
+        'System table
+        Dim DB = Database.Open("DefaultConnection")
+        Dim Cmd As String
 
         'Users table
         'UserID represents the DB's ID code for the user (user will never see)
