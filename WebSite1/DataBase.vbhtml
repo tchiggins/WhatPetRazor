@@ -11,12 +11,10 @@
 	    ORDER BY pt.TypeName"
 
         Dim rows = DB.Query(Cmd)
-
-
     End Code
     <table style ="border:1px solid black">
         @For Each row In rows
-            @<tr><td style ="border:1px solid black">@row.TypeName</td><td style="border:1px solid black">@row.PetSize</td><td style="border:1px solid black">@row.PetDiet</td><td style="border:1px solid black"><img src="~/Images/pets/@row.PetImage" height="120" /></td></tr>
+            @<tr style="border:1px solid black"><td>@row.TypeName</td><td>@row.PetSize</td><td>@row.PetDiet</td><td><img src="~/Images/pets/@row.PetImage" height="120" /></td></tr>
         Next
     </table>
 </body>
