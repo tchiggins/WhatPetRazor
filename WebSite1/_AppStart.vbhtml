@@ -8,7 +8,8 @@
         Cmd = "DELETE FROM pets.dbo.Species"
         DB.Execute(Cmd)
 
-        Cmd = "DELETE FROM pets.dbo."
+        Cmd = "DELETE FROM pets.dbo.PetType"
+        DB.Execute(Cmd)
 
         Dim CSVImportVB As New DataSetup
         CSVImportVB.PC_CSVImport("PetClass.csv")
@@ -56,13 +57,12 @@
 
         'PetType table (characteristics of specific breed)
         'PetSize will work on values of either Small, Average, or Large (as determined by the average for that particular species)
-        'Bit-type values work as boolean, with 0 representing false/not required/this type of pet can't or should not be kept this way, and 1 representing true/this type of pet requires this/this type of pet can or must be kept this way
         Cmd = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PetType')
         PRINT 'Table Exists'
         ELSE CREATE TABLE dbo.PetType (TypeID uniqueidentifier ROWGUIDCOL NOT NULL PRIMARY KEY,
         SpeciesID uniqueidentifier NOT NULL, TypeName varchar(128) NOT NULL, PetSize varchar(128) NOT NULL,
-        PetSolitary bit NOT NULL, PetIndoors bit NOT NULL, PetOutdoors bit NOT NULL,
-        PetWalk bit NOT NULL, PetDiet varchar(128) NOT NULL, PetImage varchar(512) NOT NULL);"
+        PetSolitary varchar(128) NOT NULL, PetIndoors varchar(128) NOT NULL, PetOutdoors varchar(128) NOT NULL,
+        PetWalk varchar(128) NOT NULL, PetDiet varchar(128) NOT NULL, PetImage varchar(512) NOT NULL);"
         DB.Execute(Cmd)
 
         Return True
