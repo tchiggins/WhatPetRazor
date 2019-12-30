@@ -157,7 +157,7 @@ Public Class DataSetup
         Next
         For readRow As Integer = 0 To (rowNum - 1) Step 1
             If dt.Rows(readRow)(0).Length > 1 Then
-                Cmd = "SELECT TOP (1) SpeciesID FROM pets.dbo.PetClass WHERE SpeciesName = '"
+                Cmd = "SELECT TOP (1) SpeciesID FROM pets.dbo.Species WHERE SpeciesName = '"
                 Cmd += dt.Rows(readRow)(0)
                 Cmd += "' ;"
                 ID = SendToDBReturn(myConn, Cmd, "SpeciesID")
