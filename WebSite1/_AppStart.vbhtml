@@ -20,7 +20,6 @@
     End Function
 
     Function CreateTables() As Boolean
-        'System table
         Dim DB = Database.Open("DefaultConnection")
         Dim Cmd As String
 

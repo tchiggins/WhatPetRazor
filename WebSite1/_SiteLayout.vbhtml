@@ -44,10 +44,11 @@
     End If
                         </section>
                         <nav>
-                            <ul id = "menu" >
+                            <ul id="menu">
                                 <li><a href="Default.vbhtml">Home</a></li>
-                            <li> <a href = "About.vbhtml" > About</a></li>
-                                <li> <a href = "Contact.vbhtml" > Contact</a></li>
+                                <li> <a href="About.vbhtml"> About</a></li>
+                                <li> <a href="Contact.vbhtml"> Contact</a></li>
+                                <li> <a href="DataBase.vbhtml"> Show Pets</a></li>
                             </ul>
                         </nav>
                     </div>
