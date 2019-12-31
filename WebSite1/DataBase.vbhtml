@@ -1,6 +1,13 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <script type="text/javascript">
+        function getSelected() {
+            var strUser = e.options[e.selectedIndex].value;
+            return strUser
+        }
+
+    </script>
 </head>
 <body>
     @Code
@@ -15,7 +22,7 @@
         ORDER BY pc.ClassName"
         Dim S_rows = DB.Query(Cmd)
     End Code
-    <select>
+    <select onload="getSelected()" onchange="getSelected()">
         @For Each S_row In S_rows
             @<option value="@S_row.ClassName">@S_row.ClassName</option>
         Next
@@ -30,5 +37,8 @@
                 <td><img src="~/Images/pets/@PT_row.PetImage" height="120" /></td></tr>
         Next
     </table>
+    @Code
+        DB.Close()
+    End Code
 </body>
 </html>
